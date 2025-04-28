@@ -61,8 +61,12 @@ learning_rates = []          # To track learning rate changes over time
 for i in range(max_iterations):
     # Calculate current learning rate with exponential decay
     learning_rate = initial_learning_rate * (decay_rate ** (i / decay_steps))
-    learning_rates.append(learning_rate)
+   
+    # Apply minimum cap
+    learning_rate = max(learning_rate, min_learning_rate)
     
+    learning_rates.append(learning_rate)
+
     pYtrain = forward(Xtrain, W, b)
     pYtest = forward(Xtest, W, b)
 
